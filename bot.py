@@ -9,7 +9,7 @@ from database import *
 import re
 
 # Инициализация бота и диспетчера
-bot = Bot(token='5838852905:AAHT9c3S23A1V_rDTsNc73_B-MPQVhbBNAM')
+bot = Bot(token='Токен бота')
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
