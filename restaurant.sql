@@ -1,410 +1,508 @@
-<!doctype html>
-<html lang="ru" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="referrer" content="no-referrer">
-  <meta name="robots" content="noindex,nofollow">
-  <style id="cfs-style">html{display: none;}</style>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" type="text/css" href="./themes/bootstrap/jquery/jquery-ui.css">
-  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/lib/codemirror.css?v=5.2.0">
-  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/addon/hint/show-hint.css?v=5.2.0">
-  <link rel="stylesheet" type="text/css" href="js/vendor/codemirror/addon/lint/lint.css?v=5.2.0">
-  <link rel="stylesheet" type="text/css" href="./themes/bootstrap/css/theme.css?v=5.2.0">
-  <title>phpMyAdmin</title>
-    <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.min.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-migrate.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/sprintf.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/ajax.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/keyhandler.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-ui.min.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/name-conflict-fixes.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/bootstrap/bootstrap.bundle.min.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/js.cookie.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.validate.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery-ui-timepicker-addon.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/jquery/jquery.debounce-1.0.6.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/menu_resizer.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/cross_framing_protection.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/messages.php?l=ru&v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/config.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/doclinks.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/functions.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/navigation.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/indexes.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/common.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/page_settings.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/lib/codemirror.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/mode/sql/sql.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/runmode/runmode.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/hint/show-hint.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/hint/sql-hint.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/codemirror/addon/lint/lint.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/codemirror/addon/lint/sql-lint.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/vendor/tracekit.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/error_report.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/drag_drop_import.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/shortcuts_handler.js?v=5.2.0"></script>
-  <script data-cfasync="false" type="text/javascript" src="js/dist/console.js?v=5.2.0"></script>
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Хост: 127.0.0.1:3306
+-- Время создания: Авг 05 2023 г., 19:20
+-- Версия сервера: 8.0.30
+-- Версия PHP: 7.4.30
 
-<script data-cfasync="false" type="text/javascript">
-// <![CDATA[
-CommonParams.setAll({common_query:"",opendb_url:"index.php?route=/database/structure",lang:"ru",server:"1",table:"",db:"",token:"5166214022615d26215e33513f7c2a75",text_dir:"ltr",LimitChars:"50",pftext:"",confirm:true,LoginCookieValidity:"1440",session_gc_maxlifetime:"3600",logged_in:false,is_https:false,rootPath:"/openserver/phpmyadmin/",arg_separator:"&",version:"5.2.0",auth_type:"cookie",user:"root"});
-var firstDayOfCalendar = '0';
-var themeImagePath = '.\/themes\/bootstrap\/img\/';
-var mysqlDocTemplate = '.\/url.php\u003Furl\u003Dhttps\u00253A\u00252F\u00252Fdev.mysql.com\u00252Fdoc\u00252Frefman\u00252F5.7\u00252Fen\u00252F\u002525s.html';
-var maxInputVars = 1000;
-
-if ($.datepicker) {
-  $.datepicker.regional[''].closeText = '\u0413\u043E\u0442\u043E\u0432\u043E';
-  $.datepicker.regional[''].prevText = '\u041F\u0440\u0435\u0434';
-  $.datepicker.regional[''].nextText = '\u0421\u043B\u0435\u0434\u0443\u044E\u0449\u0438\u0439';
-  $.datepicker.regional[''].currentText = '\u0421\u0435\u0433\u043E\u0434\u043D\u044F';
-  $.datepicker.regional[''].monthNames = [
-    '\u042F\u043D\u0432\u0430\u0440\u044C',
-    '\u0424\u0435\u0432\u0440\u0430\u043B\u044C',
-    '\u041C\u0430\u0440\u0442',
-    '\u0410\u043F\u0440\u0435\u043B\u044C',
-    '\u041C\u0430\u0439',
-    '\u0418\u044E\u043D\u044C',
-    '\u0418\u044E\u043B\u044C',
-    '\u0410\u0432\u0433\u0443\u0441\u0442',
-    '\u0421\u0435\u043D\u0442\u044F\u0431\u0440\u044C',
-    '\u041E\u043A\u0442\u044F\u0431\u0440\u044C',
-    '\u041D\u043E\u044F\u0431\u0440\u044C',
-    '\u0414\u0435\u043A\u0430\u0431\u0440\u044C',
-  ];
-  $.datepicker.regional[''].monthNamesShort = [
-    '\u042F\u043D\u0432',
-    '\u0424\u0435\u0432',
-    '\u041C\u0430\u0440',
-    '\u0410\u043F\u0440',
-    '\u041C\u0430\u0439',
-    '\u0418\u044E\u043D',
-    '\u0418\u044E\u043B',
-    '\u0410\u0432\u0433',
-    '\u0421\u0435\u043D',
-    '\u041E\u043A\u0442',
-    '\u041D\u043E\u044F',
-    '\u0414\u0435\u043A',
-  ];
-  $.datepicker.regional[''].dayNames = [
-    '\u0412\u043E\u0441\u043A\u0440\u0435\u0441\u0435\u043D\u044C\u0435',
-    '\u041F\u043E\u043D\u0435\u0434\u0435\u043B\u044C\u043D\u0438\u043A',
-    '\u0412\u0442\u043E\u0440\u043D\u0438\u043A',
-    '\u0421\u0440\u0435\u0434\u0430',
-    '\u0427\u0435\u0442\u0432\u0435\u0440\u0433',
-    '\u041F\u044F\u0442\u043D\u0438\u0446\u0430',
-    '\u0421\u0443\u0431\u0431\u043E\u0442\u0430',
-  ];
-  $.datepicker.regional[''].dayNamesShort = [
-    '\u0412\u0441',
-    '\u041F\u043D',
-    '\u0412\u0442',
-    '\u0421\u0440',
-    '\u0427\u0442',
-    '\u041F\u0442',
-    '\u0421\u0431',
-  ];
-  $.datepicker.regional[''].dayNamesMin = [
-    '\u0412\u0441',
-    '\u041F\u043D',
-    '\u0412\u0442',
-    '\u0421\u0440',
-    '\u0427\u0442',
-    '\u041F\u0442',
-    '\u0421\u0431',
-  ];
-  $.datepicker.regional[''].weekHeader = '\u041D\u0435\u0434.';
-  $.datepicker.regional[''].showMonthAfterYear = true;
-  $.datepicker.regional[''].yearSuffix = '';
-  $.extend($.datepicker._defaults, $.datepicker.regional['']);
-}
-
-if ($.timepicker) {
-  $.timepicker.regional[''].timeText = '\u0412\u0440\u0435\u043C\u044F';
-  $.timepicker.regional[''].hourText = '\u0427\u0430\u0441';
-  $.timepicker.regional[''].minuteText = '\u041C\u0438\u043D\u0443\u0442\u0430';
-  $.timepicker.regional[''].secondText = '\u0421\u0435\u043A\u0443\u043D\u0434\u0430';
-  $.extend($.timepicker._defaults, $.timepicker.regional['']);
-}
-
-function extendingValidatorMessages () {
-  $.extend($.validator.messages, {
-    required: '\u042D\u0442\u043E\u0020\u043F\u043E\u043B\u0435\u0020\u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E',
-    remote: '\u0418\u0441\u043F\u0440\u0430\u0432\u044C\u0442\u0435\u0020\u044D\u0442\u043E\u0020\u043F\u043E\u043B\u0435',
-    email: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439\u0020\u0430\u0434\u0440\u0435\u0441\u0020\u044D\u002D\u043F\u043E\u0447\u0442\u044B',
-    url: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439\u0020URL',
-    date: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u0443\u044E\u0020\u0434\u0430\u0442\u0443',
-    dateISO: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u0443\u044E\u0020\u0434\u0430\u0442\u0443\u0020\u0028ISO\u0029',
-    number: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0435\u0020\u0447\u0438\u0441\u043B\u043E\u0432\u043E\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435',
-    creditcard: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u044B\u0439\u0020\u043D\u043E\u043C\u0435\u0440\u0020\u043A\u0440\u0435\u0434\u0438\u0442\u043D\u043E\u0439\u0020\u043A\u0430\u0440\u0442\u044B',
-    digits: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0442\u043E\u043B\u044C\u043A\u043E\u0020\u0446\u0438\u0444\u0440\u044B',
-    equalTo: '\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0442\u043E\u0020\u0436\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435\u0020\u0435\u0449\u0435\u0020\u0440\u0430\u0437',
-    maxlength: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043D\u0435\u0020\u0431\u043E\u043B\u0435\u0435\u0020\u007B0\u007D\u0020\u0441\u0438\u043C\u0432\u043E\u043B\u0028\u0430\/\u043E\u0432\u0029'),
-    minlength: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043D\u0435\u0020\u043C\u0435\u043D\u0435\u0435\u0020\u007B0\u007D\u0020\u0441\u0438\u043C\u0432\u043E\u043B\u0028\u0430\/\u043E\u0432\u0029'),
-    rangelength: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435\u0020\u043C\u0435\u0436\u0434\u0443\u0020\u007B0\u007D\u0020\u0438\u0020\u007B1\u007D\u0020\u0441\u0438\u043C\u0432\u043E\u043B\u0430\u043C\u0438\u0020\u0434\u043B\u0438\u043D\u043E\u0439'),
-    range: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435\u0020\u043C\u0435\u0436\u0434\u0443\u0020\u007B0\u007D\u0020\u0438\u0020\u007B1\u007D\u0020\u0441\u0438\u043C\u0432\u043E\u043B\u0430\u043C\u0438'),
-    max: $.validator.format('\u0412\u0432\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435\u0020\u043C\u0435\u043D\u044C\u0448\u0435\u0435\u0020\u0438\u043B\u0438\u0020\u0440\u0430\u0432\u043D\u043E\u0435\u0020\u007B0\u007D'),
-    min: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435,\u0020\u0431\u043E\u043B\u044C\u0448\u0435\u0435\u0020\u0438\u043B\u0438\u0020\u0440\u0430\u0432\u043D\u043E\u0435\u0020\u007B0\u007D'),
-    validationFunctionForDateTime: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u0443\u044E\u0020\u0434\u0430\u0442\u0443\u0020\u0438\u043B\u0438\u0020\u0432\u0440\u0435\u043C\u044F'),
-    validationFunctionForHex: $.validator.format('\u0412\u0432\u0435\u0434\u0438\u0442\u0435\u0020\u043F\u0440\u0430\u0432\u0438\u043B\u044C\u043D\u043E\u0435\u0020\u0437\u043D\u0430\u0447\u0435\u043D\u0438\u0435\u0020HEX'),
-    validationFunctionForMd5: $.validator.format('This\u0020column\u0020can\u0020not\u0020contain\u0020a\u002032\u0020chars\u0020value'),
-    validationFunctionForAesDesEncrypt: $.validator.format('These\u0020functions\u0020are\u0020meant\u0020to\u0020return\u0020a\u0020binary\u0020result\u003B\u0020to\u0020avoid\u0020inconsistent\u0020results\u0020you\u0020should\u0020store\u0020it\u0020in\u0020a\u0020BINARY,\u0020VARBINARY,\u0020or\u0020BLOB\u0020column.')
-  });
-}
-
-ConsoleEnterExecutes=false
-
-AJAX.scriptHandler
-  .add('vendor/jquery/jquery.min.js', 0)
-  .add('vendor/jquery/jquery-migrate.js', 0)
-  .add('vendor/sprintf.js', 1)
-  .add('ajax.js', 0)
-  .add('keyhandler.js', 1)
-  .add('vendor/jquery/jquery-ui.min.js', 0)
-  .add('name-conflict-fixes.js', 1)
-  .add('vendor/bootstrap/bootstrap.bundle.min.js', 1)
-  .add('vendor/js.cookie.js', 1)
-  .add('vendor/jquery/jquery.validate.js', 0)
-  .add('vendor/jquery/jquery-ui-timepicker-addon.js', 0)
-  .add('vendor/jquery/jquery.debounce-1.0.6.js', 0)
-  .add('menu_resizer.js', 1)
-  .add('cross_framing_protection.js', 0)
-  .add('messages.php', 0)
-  .add('config.js', 1)
-  .add('doclinks.js', 1)
-  .add('functions.js', 1)
-  .add('navigation.js', 1)
-  .add('indexes.js', 1)
-  .add('common.js', 1)
-  .add('page_settings.js', 1)
-  .add('vendor/codemirror/lib/codemirror.js', 0)
-  .add('vendor/codemirror/mode/sql/sql.js', 0)
-  .add('vendor/codemirror/addon/runmode/runmode.js', 0)
-  .add('vendor/codemirror/addon/hint/show-hint.js', 0)
-  .add('vendor/codemirror/addon/hint/sql-hint.js', 0)
-  .add('vendor/codemirror/addon/lint/lint.js', 0)
-  .add('codemirror/addon/lint/sql-lint.js', 0)
-  .add('vendor/tracekit.js', 1)
-  .add('error_report.js', 1)
-  .add('drag_drop_import.js', 1)
-  .add('shortcuts_handler.js', 1)
-  .add('console.js', 1)
-;
-$(function() {
-        AJAX.fireOnload('vendor/sprintf.js');
-        AJAX.fireOnload('keyhandler.js');
-        AJAX.fireOnload('name-conflict-fixes.js');
-      AJAX.fireOnload('vendor/bootstrap/bootstrap.bundle.min.js');
-      AJAX.fireOnload('vendor/js.cookie.js');
-            AJAX.fireOnload('menu_resizer.js');
-          AJAX.fireOnload('config.js');
-      AJAX.fireOnload('doclinks.js');
-      AJAX.fireOnload('functions.js');
-      AJAX.fireOnload('navigation.js');
-      AJAX.fireOnload('indexes.js');
-      AJAX.fireOnload('common.js');
-      AJAX.fireOnload('page_settings.js');
-                    AJAX.fireOnload('vendor/tracekit.js');
-      AJAX.fireOnload('error_report.js');
-      AJAX.fireOnload('drag_drop_import.js');
-      AJAX.fireOnload('shortcuts_handler.js');
-      AJAX.fireOnload('console.js');
-  });
-// ]]>
-</script>
-
-  <noscript><style>html{display:block}</style></noscript>
-</head>
-<body id=loginform>
-  
-  
-  
-
-  
-  
-  
-  
-
-  <div id="page_content">
-    
-
-    
-    <div class="modal fade" id="previewSqlModal" tabindex="-1" aria-labelledby="previewSqlModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="previewSqlModalLabel">Loading</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div class="modal fade" id="enumEditorModal" tabindex="-1" aria-labelledby="enumEditorModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="enumEditorModalLabel">Редактор ENUM/SET</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="enumEditorGoButton" data-bs-dismiss="modal">Вперёд</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-    <div class="modal fade" id="createViewModal" tabindex="-1" aria-labelledby="createViewModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" id="createViewModalDialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createViewModalLabel">Создать представление</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-      </div>
-      <div class="modal-body"></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" id="createViewModalGoButton">Вперёд</button>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="container">
-<div class="row">
-<div class="col-12">
-<a href="./url.php?url=https%3A%2F%2Fwww.phpmyadmin.net%2F" target="_blank" rel="noopener noreferrer" class="logo">
-<img src="./themes/bootstrap/img/logo_right.png" id="imLogo" name="imLogo" alt="phpMyAdmin" border="0">
-</a>
-<h1>Добро пожаловать в <bdo dir="ltr" lang="en">phpMyAdmin</bdo></h1>
-
-<noscript>
-<div class="alert alert-danger" role="alert">
-  <img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> Для полноценной работы необходимо включить JavaScript!
-</div>
-
-</noscript>
-
-<div class="hide" id="js-https-mismatch">
-<div class="alert alert-danger" role="alert">
-  <img src="themes/dot.gif" title="" alt="" class="icon ic_s_error"> Существует несоответствие между HTTPS, указанным на сервере и клиенте. Это может привести к неработоспособному phpMyAdmin или угрозе безопасности. Исправьте конфигурацию своего сервера, чтобы правильно указать HTTPS.
-</div>
-
-</div>
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
+--
+-- База данных: `restaurant`
+--
 
+-- --------------------------------------------------------
 
-  <div class='hide js-show'>
-    <div class="card mb-4">
-      <div class="card-header">
-        <span id="languageSelectLabel">
-          Язык                                  <i lang="en" dir="ltr">(Language)</i>
-                  </span>
-      </div>
-      <div class="card-body">
-        <form method="get" action="index.php?route=/" class="disableAjax">
-          <input type="hidden" name="route" value="/export"><input type="hidden" name="token" value="5166214022615d26215e33513f7c2a75">
-          <select name="lang" class="form-select autosubmit" lang="en" dir="ltr" id="languageSelect" aria-labelledby="languageSelectLabel">
-                          <option value="sq">Shqip - Albanian</option>
-                          <option value="ar">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577; - Arabic</option>
-                          <option value="hy">Հայերէն - Armenian</option>
-                          <option value="az">Az&#601;rbaycanca - Azerbaijani</option>
-                          <option value="bn">বাংলা - Bangla</option>
-                          <option value="be">&#1041;&#1077;&#1083;&#1072;&#1088;&#1091;&#1089;&#1082;&#1072;&#1103; - Belarusian</option>
-                          <option value="bg">&#1041;&#1098;&#1083;&#1075;&#1072;&#1088;&#1089;&#1082;&#1080; - Bulgarian</option>
-                          <option value="ca">Catal&agrave; - Catalan</option>
-                          <option value="zh_cn">&#20013;&#25991; - Chinese simplified</option>
-                          <option value="zh_tw">&#20013;&#25991; - Chinese traditional</option>
-                          <option value="cs">Čeština - Czech</option>
-                          <option value="da">Dansk - Danish</option>
-                          <option value="nl">Nederlands - Dutch</option>
-                          <option value="en">English</option>
-                          <option value="en_gb">English (United Kingdom)</option>
-                          <option value="et">Eesti - Estonian</option>
-                          <option value="fi">Suomi - Finnish</option>
-                          <option value="fr">Fran&ccedil;ais - French</option>
-                          <option value="gl">Galego - Galician</option>
-                          <option value="de">Deutsch - German</option>
-                          <option value="el">&Epsilon;&lambda;&lambda;&eta;&nu;&iota;&kappa;&#940; - Greek</option>
-                          <option value="he">&#1506;&#1489;&#1512;&#1497;&#1514; - Hebrew</option>
-                          <option value="hu">Magyar - Hungarian</option>
-                          <option value="id">Bahasa Indonesia - Indonesian</option>
-                          <option value="ia">Interlingua</option>
-                          <option value="it">Italiano - Italian</option>
-                          <option value="ja">&#26085;&#26412;&#35486; - Japanese</option>
-                          <option value="kk">Қазақ - Kazakh</option>
-                          <option value="ko">&#54620;&#44397;&#50612; - Korean</option>
-                          <option value="nb">Norsk - Norwegian</option>
-                          <option value="pl">Polski - Polish</option>
-                          <option value="pt">Portugu&ecirc;s - Portuguese</option>
-                          <option value="pt_br">Portugu&ecirc;s (Brasil) - Portuguese (Brazil)</option>
-                          <option value="ro">Rom&acirc;n&#259; - Romanian</option>
-                          <option value="ru" selected>&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081; - Russian</option>
-                          <option value="si">&#3523;&#3538;&#3458;&#3524;&#3517; - Sinhala</option>
-                          <option value="sk">Sloven&#269;ina - Slovak</option>
-                          <option value="sl">Sloven&scaron;&#269;ina - Slovenian</option>
-                          <option value="es">Espa&ntilde;ol - Spanish</option>
-                          <option value="sv">Svenska - Swedish</option>
-                          <option value="tr">T&uuml;rk&ccedil;e - Turkish</option>
-                          <option value="uk">&#1059;&#1082;&#1088;&#1072;&#1111;&#1085;&#1089;&#1100;&#1082;&#1072; - Ukrainian</option>
-                          <option value="vi">Tiếng Việt - Vietnamese</option>
-                      </select>
-        </form>
-      </div>
-    </div>
-  </div>
+--
+-- Структура таблицы `Блюда`
+--
 
-<form method="post" id="login_form" action="index.php?route=/" name="login_form" class="disableAjax hide js-show">
-    <input type="hidden" name="route" value="/export"><input type="hidden" name="token" value="5166214022615d26215e33513f7c2a75">
-  <input type="hidden" name="set_session" value="4h16oibeqtua10msr9l9n9b07sbkvpt9">
-  
-  <div class="card mb-4">
-    <div class="card-header">
-      Авторизация      <a href="./doc/html/index.html" target="documentation"><img src="themes/dot.gif" title="Документация" alt="Документация" class="icon ic_b_help"></a>
-    </div>
-    <div class="card-body">
-      
-      <div class="row mb-3">
-        <label for="input_username" class="col-sm-4 col-form-label">
-          Пользователь:        </label>
-        <div class="col-sm-8">
-          <input type="text" name="pma_username" id="input_username" value="root" class="form-control" autocomplete="username">
-        </div>
-      </div>
+CREATE TABLE `Блюда` (
+  `Блюдо` int NOT NULL,
+  `Название` varchar(255) DEFAULT NULL,
+  `Тип` varchar(255) DEFAULT NULL,
+  `Ингредиенты` varchar(255) DEFAULT NULL,
+  `Цена` decimal(10,2) DEFAULT NULL,
+  `Наличие` tinyint(1) DEFAULT NULL,
+  `Скидка` decimal(5,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-      <div class="row">
-        <label for="input_password" class="col-sm-4 col-form-label">
-          Пароль:        </label>
-        <div class="col-sm-8">
-          <input type="password" name="pma_password" id="input_password" value="" class="form-control" autocomplete="current-password">
-        </div>
-      </div>
+--
+-- Дамп данных таблицы `Блюда`
+--
 
-              <input type="hidden" name="server" value="1">
-          </div>
-    <div class="card-footer">
-              <input class="btn btn-primary" value="Авторизация" type="submit" id="input_go">
-          </div>
-  </div>
-</form>
+INSERT INTO `Блюда` (`Блюдо`, `Название`, `Тип`, `Ингредиенты`, `Цена`, `Наличие`, `Скидка`) VALUES
+(1, 'Пельмени сибирские', 'Горячие закуски', 'Прозрачный бульон, хвойное масло, сметана', '1080.00', 1, NULL),
+(2, 'Арахис по-лаосски', 'Холодные закуски', 'Арахис, обжаренный на масле с кайенским перцем и соевым соусом', '290.00', 1, NULL),
+(3, 'Устрицы', 'Холодные закуски', 'Устрицы', '290.00', 1, NULL),
+(4, 'Парфе из печени цесарки с черным трюфелем', 'Холодные закуски', 'Варенье из слив, мороженное со вкусом сдобы', '850.00', 1, NULL),
+(5, 'Традиционный французский суп', 'Супы', 'Куриный бульон, тимьян, слоеное тесто', '550.00', 1, NULL),
+(6, 'Фирменный сырный суп', 'Супы', 'Из 4 сыров', '850.00', 1, NULL),
+(7, 'Запеченный сыр Бри', 'Горячие закуски', 'С грушей и розмарином', '1490.00', 1, NULL),
+(8, 'Котлетки из судака', 'Основные блюда', 'Печёный в углях картофель, разносолы, соус тар-тар', '1250.00', 1, NULL),
+(9, 'Пирог с дичью и фуагра', 'Основные блюда', 'Соус с трюфелем, картофельное пюре, мочёные райские яблочки', '1500.00', 1, NULL),
+(10, 'Оливье от \"Люсьена\"', 'Холодные закуски', 'Ростбиф, утка и цыпленок', '720.00', 1, NULL),
+(11, 'Деревенский салат', 'Холодные закуски', 'Со свежими огурцами, куриным яйцом, редисом, зеленым луком и укропом. Заправляется сметана & майонез', '420.00', 1, NULL),
+(12, 'Жюльен из белых грибов', 'Горячие закуски', 'Запеченный в тончайших блинчиках', '460.00', 1, NULL),
+(13, 'Царская уха', 'Супы', 'Из трех видов рыб, с рыбными варениками', '790.00', 1, NULL),
+(14, 'Мидии в сливочном соусе', 'Основные блюда', 'Сковородка тихоокеанских мидий в створках с луком-порей и соусом из слоивок и сыра', '580.00', 1, NULL),
+(15, 'Феттуччине с грибами', 'Основные блюда', 'Паста, шампиньоны, петрушка, лук, томаты черри, сливки и пармезан', '490.00', 1, NULL),
+(16, 'Пенне с овощами и соусом аррабиата', 'Основные блюда', 'Кабачок, перец болгарский, баклажаны, брокколи, оливки, маслины', '420.00', 1, NULL),
+(17, 'Старорусский пудинг', 'Десерты', 'Из яичных желтков под хрустящей карамелью', '410.00', 1, NULL),
+(18, 'Песочный тарт', 'Десерты', 'С желе из гуавы и нежным кремом из карамельного шоколада', '320.00', 1, NULL),
+(19, 'Горячий шоколадный торт', 'Десерты', 'С ванильным мороженым', '390.00', 1, NULL),
+(20, 'Наполеон', 'Десерты', 'С клубникой \"фламбе\" и карамельным куполом', '670.00', 1, NULL);
 
+-- --------------------------------------------------------
 
-</div>
+--
+-- Структура таблицы `Блюда_доставка`
+--
 
+CREATE TABLE `Блюда_доставка` (
+  `Доставка` int DEFAULT NULL,
+  `Блюдо` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+--
+-- Дамп данных таблицы `Блюда_доставка`
+--
 
-  </div>
-  </body>
-</html>
+INSERT INTO `Блюда_доставка` (`Доставка`, `Блюдо`) VALUES
+(1, 2),
+(2, 2),
+(3, 2),
+(4, 1),
+(5, 2),
+(6, 1),
+(7, 1),
+(8, 1),
+(8, 2),
+(8, 3),
+(8, 4),
+(8, 5),
+(9, 15),
+(9, 18),
+(9, 20),
+(10, 11),
+(11, 1),
+(11, 2),
+(11, 12),
+(12, 1),
+(12, 5),
+(12, 6),
+(12, 13),
+(13, 7),
+(13, 1),
+(13, 12),
+(14, 5),
+(14, 6),
+(14, 13),
+(15, 5),
+(15, 6),
+(15, 13),
+(16, 1),
+(16, 7),
+(16, 12),
+(17, 1),
+(17, 2),
+(17, 3),
+(17, 4),
+(17, 5),
+(18, 1),
+(18, 2),
+(18, 3),
+(18, 4),
+(18, 5),
+(18, 6),
+(19, 1),
+(19, 2),
+(20, 1),
+(20, 2),
+(21, 1),
+(21, 2),
+(21, 3),
+(21, 4),
+(21, 5),
+(22, 1),
+(22, 2),
+(22, 3),
+(22, 4),
+(22, 5),
+(23, 1),
+(23, 2),
+(23, 3),
+(23, 4),
+(24, 1),
+(24, 2),
+(24, 3),
+(24, 5),
+(25, 1),
+(25, 2),
+(25, 3),
+(25, 4),
+(25, 5),
+(25, 6),
+(25, 7),
+(26, 1),
+(26, 2),
+(26, 3),
+(27, 1),
+(27, 2),
+(27, 3),
+(27, 4),
+(27, 5),
+(27, 6),
+(28, 1),
+(28, 2),
+(28, 3),
+(28, 4),
+(29, 15),
+(29, 4),
+(29, 7),
+(29, 1),
+(29, 2),
+(30, 1),
+(30, 2),
+(30, 3),
+(30, 6),
+(31, 1),
+(31, 3),
+(31, 7);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Бронирования`
+--
+
+CREATE TABLE `Бронирования` (
+  `Столик` int NOT NULL,
+  `Дата` datetime NOT NULL,
+  `Номер_телефона` varchar(255) DEFAULT NULL,
+  `Имя` varchar(255) DEFAULT NULL,
+  `Фамилия` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `Бронирования`
+--
+
+INSERT INTO `Бронирования` (`Столик`, `Дата`, `Номер_телефона`, `Имя`, `Фамилия`) VALUES
+(8, '2023-06-22 23:30:00', '89000000000', 'Aaa', 'Ttt');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Доставка`
+--
+
+CREATE TABLE `Доставка` (
+  `Доставка` int NOT NULL,
+  `Номер_телефона` varchar(255) DEFAULT NULL,
+  `Имя` varchar(255) DEFAULT NULL,
+  `Фамилия` varchar(255) DEFAULT NULL,
+  `Адрес` varchar(255) DEFAULT NULL,
+  `Дата_время_оформления` datetime DEFAULT NULL,
+  `Способ_оплаты_доставки` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `Доставка`
+--
+
+INSERT INTO `Доставка` (`Доставка`, `Номер_телефона`, `Имя`, `Фамилия`, `Адрес`, `Дата_время_оформления`, `Способ_оплаты_доставки`) VALUES
+(1, 'фыа', 'фыа', 'ыа', 'ыа', '2023-06-15 18:06:41', 'Оплата курьеру'),
+(2, 'фыаф', 'фыа', 'фы', 'а', '2023-06-15 18:07:33', 'Онлайн оплата'),
+(3, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-15 18:09:40', 'Онлайн оплата'),
+(4, 'фыа', 'фыаф', 'ыаф', 'фыа', '2023-06-15 18:23:31', 'Оплата курьеру'),
+(5, 'фыа', 'фыафы', 'фыа', 'фыа', '2023-06-15 18:57:52', 'Оплата курьеру'),
+(6, 'asf', 'asf', 'asf', 'asf', '2023-06-15 19:07:57', 'Онлайн оплата'),
+(7, 'asf', 'asf', 'asf', 'saf', '2023-06-15 19:08:23', 'Оплата курьеру'),
+(8, 'фыа', 'ыфа', 'фыа', 'ыа', '2023-06-15 19:13:16', 'Онлайн оплата'),
+(9, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-15 19:37:58', 'Онлайн оплата'),
+(10, 'fsa', 'asf', 'asf', 'asf', '2023-06-15 21:29:38', 'Онлайн оплата'),
+(11, 'фыа', 'ыфа', 'фыа', 'фыа', '2023-06-16 04:19:10', 'Оплата курьеру'),
+(12, '8900232132', 'asgasga', 'asgasg', 'dsgsdgsd', '2023-06-16 07:15:44', 'Онлайн оплата'),
+(13, '8900232132', 'Никита', 'Рубцов', 'Карла Маркса 50/50', '2023-06-16 07:26:07', 'Онлайн оплата'),
+(14, '1789', 'никита', 'фа', 'ыфа', '2023-06-19 09:36:16', 'Онлайн оплата'),
+(15, 'ыфафы', 'фыа', 'фыа', 'фыа', '2023-06-19 17:31:40', 'Оплата курьеру'),
+(16, 'VIP', 'VIP', 'VIP', 'VIP', '2023-06-20 19:58:01', 'Онлайн оплата'),
+(17, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:02:41', 'Онлайн оплата'),
+(18, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:07:06', 'Онлайн оплата'),
+(19, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:16:55', 'Онлайн оплата'),
+(20, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:19:05', 'Онлайн оплата'),
+(21, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:20:26', 'Онлайн оплата'),
+(22, 'фыа', 'фыа', 'фыа', 'ффыа', '2023-06-21 03:22:41', 'Онлайн оплата'),
+(23, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:26:59', 'Онлайн оплата'),
+(24, 'аыф', 'фыа', 'ыфа', 'фыа', '2023-06-21 03:28:21', 'Онлайн оплата'),
+(25, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:31:33', 'Онлайн оплата'),
+(26, 'фыа', 'фыа', 'фыа', 'фыа', '2023-06-21 03:32:54', 'Онлайн оплата'),
+(27, '79238886123', 'Афыафы', 'фыа', 'ФЫААФЫ', '2023-06-21 03:54:26', 'Онлайн оплата'),
+(28, '79238886123', 'ыфа', 'фыа', 'фыафы', '2023-06-21 03:57:07', 'Онлайн оплата'),
+(29, '89631352157', 'фыпфып', 'ыфпфып', 'ыфп', '2023-06-21 06:54:02', 'Онлайн оплата'),
+(30, '4383483483', 'sasagga', 'asgasga', 'asgasga', '2023-06-21 06:57:54', 'Оплата курьеру'),
+(31, '8312412412', 'fsafas', 'asfasf', 'asfasfas', '2023-06-21 07:55:18', 'Оплата курьеру');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Доходы`
+--
+
+CREATE TABLE `Доходы` (
+  `Дата` datetime DEFAULT NULL,
+  `Доход` decimal(10,2) DEFAULT NULL,
+  `Состояние_счета` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Заказы`
+--
+
+CREATE TABLE `Заказы` (
+  `Заказ` int NOT NULL,
+  `Столик` int DEFAULT NULL,
+  `Дата` datetime DEFAULT NULL,
+  `Способ_платы` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `Заказы`
+--
+
+INSERT INTO `Заказы` (`Заказ`, `Столик`, `Дата`, `Способ_платы`) VALUES
+(1, 2, '2023-06-10 01:46:24', 'Карта'),
+(2, 1, '2023-06-10 01:55:38', 'Карта'),
+(3, 1, '2023-06-10 11:51:53', 'Наличные'),
+(4, 1, '2023-06-10 11:52:39', 'Наличные'),
+(5, 1, '2023-06-10 11:54:37', 'Карта'),
+(6, 1, '2023-06-10 11:57:09', 'Карта'),
+(7, 1, '2023-06-10 12:12:48', 'Наличные'),
+(8, 2, '2023-06-10 12:13:07', 'Наличные'),
+(9, 2, '2023-06-10 12:13:32', 'Наличные'),
+(10, 1, '2023-06-10 15:26:14', 'Карта'),
+(11, 4, '2023-06-10 15:36:45', 'Наличные'),
+(12, 1, '2023-06-12 15:44:28', 'Карта'),
+(13, 1, '2023-06-13 13:15:21', 'Наличные'),
+(14, 2, '2023-06-13 18:45:18', 'Наличные'),
+(15, 1, '2023-06-13 18:59:35', 'Карта'),
+(16, 3, '2023-06-13 23:53:30', 'Наличные'),
+(17, 2, '2023-06-13 23:54:00', 'Наличные'),
+(18, 12, '2023-06-15 19:39:59', 'Наличные'),
+(19, 2, '2023-06-15 19:40:24', 'Наличные'),
+(20, 2, '2023-06-15 21:31:26', 'Наличные'),
+(21, 5, '2023-06-19 09:19:05', 'Карта'),
+(22, 6, '2023-06-19 17:29:00', 'Наличные'),
+(23, 7, '2023-06-20 22:20:17', 'Наличные'),
+(24, 5, '2023-06-21 03:57:44', 'Наличные'),
+(25, 2, '2023-06-21 04:05:22', 'Наличные'),
+(26, 5, '2023-06-21 06:51:35', 'Наличные'),
+(27, 5, '2023-06-21 06:59:24', 'Карта'),
+(28, 5, '2023-06-21 08:07:12', 'Наличные'),
+(29, 5, '2023-06-21 11:24:50', 'Карта'),
+(30, 20, '2023-06-21 17:34:01', 'Карта');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Заказы_Блюда`
+--
+
+CREATE TABLE `Заказы_Блюда` (
+  `Заказ` int DEFAULT NULL,
+  `Блюдо` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `Заказы_Блюда`
+--
+
+INSERT INTO `Заказы_Блюда` (`Заказ`, `Блюдо`) VALUES
+(1, 17),
+(2, 1),
+(3, 1),
+(4, 1),
+(5, 1),
+(6, 13),
+(7, 1),
+(8, 1),
+(9, 12),
+(10, 12),
+(11, 12),
+(12, 3),
+(13, 1),
+(14, 1),
+(15, 1),
+(16, 1),
+(17, 1),
+(18, 7),
+(19, 1),
+(20, 1),
+(21, 1),
+(22, 1),
+(23, 7),
+(24, 1),
+(25, 1),
+(26, 1),
+(27, 12),
+(28, 1),
+(29, 1),
+(30, 20);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `Столики`
+--
+
+CREATE TABLE `Столики` (
+  `Столик` int NOT NULL,
+  `Тип` varchar(255) DEFAULT NULL,
+  `Места` int DEFAULT NULL,
+  `Цена` decimal(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Дамп данных таблицы `Столики`
+--
+
+INSERT INTO `Столики` (`Столик`, `Тип`, `Места`, `Цена`) VALUES
+(1, 'VIP', 4, '7910.00'),
+(2, 'В зале', 4, '480.00'),
+(3, 'У окна', 6, '2910.00'),
+(4, 'У окна', 2, '4600.00'),
+(5, 'В зале', 8, '700.00'),
+(6, 'У окна', 2, '2210.00'),
+(7, 'VIP', 2, '7330.00'),
+(8, 'У окна', 4, '2960.00'),
+(9, 'VIP', 10, '9490.00'),
+(10, 'В зале', 6, '920.00'),
+(11, 'У окна', 4, '1970.00'),
+(12, 'У окна', 4, '4660.00'),
+(13, 'VIP', 2, '6390.00'),
+(14, 'VIP', 6, '5690.00'),
+(15, 'У окна', 6, '1190.00'),
+(16, 'В зале', 3, '680.00'),
+(17, 'VIP', 3, '8590.00'),
+(18, 'В зале', 4, '640.00'),
+(19, 'У окна', 3, '2440.00'),
+(20, 'VIP', 6, '7290.00');
+
+--
+-- Индексы сохранённых таблиц
+--
+
+--
+-- Индексы таблицы `Блюда`
+--
+ALTER TABLE `Блюда`
+  ADD PRIMARY KEY (`Блюдо`);
+
+--
+-- Индексы таблицы `Блюда_доставка`
+--
+ALTER TABLE `Блюда_доставка`
+  ADD KEY `Доставка` (`Доставка`),
+  ADD KEY `Блюдо` (`Блюдо`);
+
+--
+-- Индексы таблицы `Бронирования`
+--
+ALTER TABLE `Бронирования`
+  ADD PRIMARY KEY (`Столик`,`Дата`);
+
+--
+-- Индексы таблицы `Доставка`
+--
+ALTER TABLE `Доставка`
+  ADD PRIMARY KEY (`Доставка`);
+
+--
+-- Индексы таблицы `Заказы`
+--
+ALTER TABLE `Заказы`
+  ADD PRIMARY KEY (`Заказ`),
+  ADD KEY `Столик` (`Столик`);
+
+--
+-- Индексы таблицы `Заказы_Блюда`
+--
+ALTER TABLE `Заказы_Блюда`
+  ADD KEY `Заказ` (`Заказ`),
+  ADD KEY `Блюдо` (`Блюдо`);
+
+--
+-- Индексы таблицы `Столики`
+--
+ALTER TABLE `Столики`
+  ADD PRIMARY KEY (`Столик`);
+
+--
+-- AUTO_INCREMENT для сохранённых таблиц
+--
+
+--
+-- AUTO_INCREMENT для таблицы `Блюда`
+--
+ALTER TABLE `Блюда`
+  MODIFY `Блюдо` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT для таблицы `Доставка`
+--
+ALTER TABLE `Доставка`
+  MODIFY `Доставка` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT для таблицы `Заказы`
+--
+ALTER TABLE `Заказы`
+  MODIFY `Заказ` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- Ограничения внешнего ключа сохраненных таблиц
+--
+
+--
+-- Ограничения внешнего ключа таблицы `Блюда_доставка`
+--
+ALTER TABLE `Блюда_доставка`
+  ADD CONSTRAINT `блюда_доставка_ibfk_1` FOREIGN KEY (`Доставка`) REFERENCES `Доставка` (`Доставка`),
+  ADD CONSTRAINT `блюда_доставка_ibfk_2` FOREIGN KEY (`Блюдо`) REFERENCES `Блюда` (`Блюдо`);
+
+--
+-- Ограничения внешнего ключа таблицы `Бронирования`
+--
+ALTER TABLE `Бронирования`
+  ADD CONSTRAINT `бронирования_ibfk_1` FOREIGN KEY (`Столик`) REFERENCES `Столики` (`Столик`);
+
+--
+-- Ограничения внешнего ключа таблицы `Заказы`
+--
+ALTER TABLE `Заказы`
+  ADD CONSTRAINT `заказы_ibfk_1` FOREIGN KEY (`Столик`) REFERENCES `Столики` (`Столик`);
+
+--
+-- Ограничения внешнего ключа таблицы `Заказы_Блюда`
+--
+ALTER TABLE `Заказы_Блюда`
+  ADD CONSTRAINT `заказы_блюда_ibfk_1` FOREIGN KEY (`Заказ`) REFERENCES `Заказы` (`Заказ`),
+  ADD CONSTRAINT `заказы_блюда_ibfk_2` FOREIGN KEY (`Блюдо`) REFERENCES `Блюда` (`Блюдо`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
