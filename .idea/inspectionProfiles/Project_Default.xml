@@ -1,0 +1,21 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="main.start_command" />
+          <option value="main.menu_command" />
+          <option value="main.book_command" />
+          <option value="main.pay_command" />
+          <option value="main.MessageHandler" />
+          <option value="main.Filters" />
+          <option value="main.message_handler" />
+          <option value="bot.MockMessage" />
+          <option value="bot.show_menu" />
+          <option value="bot.bot" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
